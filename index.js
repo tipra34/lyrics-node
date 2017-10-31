@@ -24,13 +24,17 @@ axios.get('http://lyrics.wikia.com/wiki/LyricWiki')
 function getTopItunesLyrics(){
   topItunes.forEach((elem,index)=>{
     let $;
-    axios.get(`http://lyrics.wikia.com/${elem.link}`)
+    axios.get(`http://lyrics.wikia.com${elem.link}`)
     .then((response)=>{
       let data = response.data
       $ = cheerio.load(data)
       let lyrics = $('#mw-content-text>div.lyricbox').html()
+      let embed = $('span.youtube').text()
       topItunes[index].lyrics = lyrics
-      topItunes[index].link = $('iframe').attr('src')
+      if(embed){
+        embed = 'https://www.youtube.com/embed/' + embed.match(/[^|]*/)[0]
+        topItunes[index].embed = embed
+      }
       }).catch((response)=>{
       topItunes[index].lyrics = 'No lyrics found'
     })
@@ -75,11 +79,14 @@ app.get('/lyrics/:artistsong', function(req, res){
   .then((response)=>{
     let data = response.data
     $ = cheerio.load(data)
-    res.send({
-      rescode: 200,
-      link: $('iframe').attr('src'),
-      lyrics: $('#mw-content-text>div.lyricbox').html()
-    })
+    let embed = $('span.youtube').text()
+    let result ={}
+    if(embed){
+      result.embed = 'https://www.youtube.com/embed/' + embed.match(/[^|]*/)[0]
+    }
+    result.rescode = 200
+    result.lyrics = $('#mw-content-text>div.lyricbox').html()
+    res.send(result)
   }).catch((response)=>{
     rescode: 404
   })
