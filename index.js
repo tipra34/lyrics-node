@@ -27,7 +27,7 @@ axios.get('http://lyrics.wikia.com/wiki/LyricWiki')
        $ = cheerio.load(response.data);
        $('#mpITunesFeed>ol>li>b>a').each((i,elem)=>{
          let result = {
-           link: $(elem).attr('href')match(/\/([^/:]*):(.*)/)
+           link: $(elem).attr('href')
          }
          topItunes.push(result)
        })
@@ -44,7 +44,7 @@ function getTopItunesLyrics(){
       let data = response.data
       $ = cheerio.load(data)
       let lyrics = $('#mw-content-text>div.lyricbox').html()
-      let artistsong = elem.link.match(/\/([^:]*):(.*)/)
+      let artistsong = elem.link.match(/([^/:]*):(.*)/)
       let embed = $('span.youtube').text()
       topItunes[index].lyrics = lyrics
       topItunes[index].artist = artistsong[1]
@@ -109,6 +109,6 @@ app.get('/lyrics/:artistsong', function(req, res){
     rescode: 404
   })
 })
-app.listen(process.env.PORT, ()=>{
+app.listen(3000, ()=>{
   console.log('listening on port 3000')
 })
