@@ -98,7 +98,7 @@ app.get('/lyrics/:artistsong', function(req, res){
     let embed = $('span.youtube').text()
     let result ={}
     if(embed){
-      result.embed = 'https://www.youtube.com/embed/' + embed.match(/[^|]*/)[0]
+      result.embed = 'https://www.youtube.com/watch?v=' + embed.match(/[^|]*/)[0]
     }
     result.rescode = 200
     result.lyrics = $('#mw-content-text>div.lyricbox').html()
