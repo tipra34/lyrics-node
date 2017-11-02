@@ -27,8 +27,7 @@ axios.get('http://lyrics.wikia.com/wiki/LyricWiki')
        $ = cheerio.load(response.data);
        $('#mpITunesFeed>ol>li>b>a').each((i,elem)=>{
          let result = {
-           link: $(elem).attr('href'),
-           song: $(elem).text()
+           link: $(elem).attr('href')match(/\/([^/:]*):(.*)/)
          }
          topItunes.push(result)
        })
@@ -45,8 +44,11 @@ function getTopItunesLyrics(){
       let data = response.data
       $ = cheerio.load(data)
       let lyrics = $('#mw-content-text>div.lyricbox').html()
+      let artistsong = elem.link.match(/\/([^:]*):(.*)/)
       let embed = $('span.youtube').text()
       topItunes[index].lyrics = lyrics
+      topItunes[index].artist = artistsong[1]
+      topItunes[index].song = artistsong[2]
       if(embed){
         embed = 'https://www.youtube.com/watch?v=' + embed.match(/[^|]*/)[0]
         topItunes[index].embed = embed
