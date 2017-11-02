@@ -48,7 +48,7 @@ function getTopItunesLyrics(){
       let embed = $('span.youtube').text()
       topItunes[index].lyrics = lyrics
       if(embed){
-        embed = 'https://www.youtube.com/embed/' + embed.match(/[^|]*/)[0]
+        embed = 'https://www.youtube.com/watch?v=' + embed.match(/[^|]*/)[0]
         topItunes[index].embed = embed
       }
       }).catch((response)=>{
