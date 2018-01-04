@@ -11,9 +11,9 @@ https://pure-retreat-97988.herokuapp.com/ <del>
 Usage: https://pure-retreat-97988.herokuapp.com/search/SearchQuery<br>
        https://pure-retreat-97988.herokuapp.com/lyrics/artist:song<br><br>
 Example:
-https://pure-retreat-97988.herokuapp.com/lyrics/Taylor%20Swift:back%20to%20december
-https://pure-retreat-97988.herokuapp.com/search/taylor%20swift
-https://pure-retreat-97988.herokuapp.com/search/back%20to%december
+https://pure-retreat-97988.herokuapp.com/lyrics/Taylor%20Swift:back%20to%20december<br>
+https://pure-retreat-97988.herokuapp.com/search/taylor%20swift<br>
+https://pure-retreat-97988.herokuapp.com/search/back%20to%december<br>
 
                      
 
